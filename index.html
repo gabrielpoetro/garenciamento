@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel Gerenciador</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="login" class="painel">
+    <h1>🔐 Área de Administração</h1>
+    <input type="password" id="senha" placeholder="Digite a senha">
+    <button onclick="verificarSenha()">Entrar</button>
+  </div>
+
+  <div id="painel" class="painel" style="display:none;">
+    <h1>🌞 Painel de Sites</h1>
+    <div class="frase" id="frase">Carregando inspiração...</div>
+
+    <section class="sites">
+      <h2>🌐 Meus Projetos</h2>
+      <ul>
+        <li><a href="https://gabrielpoetro.github.io/equilibra/" target="_blank">🌿 Equilibra 3.0</a></li>
+        <li><a href="https://gabrielpoetro.github.io/lista-de-compras/" target="_blank">🛒 Lista de Compras</a></li>
+        <li><a href="https://gabrielpoetro.github.io/Receitas-da-Vov-/" target="_blank">👵 Receitas da Vovó</a></li>
+        <li><a href="https://gabrielpoetro.github.io/poema/" target="_blank">🌸 Gerador de Poemas</a></li>
+        <li><a href="https://gabrielpoetro.github.io/atemporal/" target="_blank">⏳ Atemporal</a></li>
+      </ul>
+    </section>
+
+    <section class="anotacoes">
+      <h2>📝 Ideias para Melhorar</h2>
+      <textarea id="melhorias" placeholder="Escreva aqui suas ideias..."></textarea>
+      <button onclick="salvarMelhorias()">Salvar</button>
+    </section>
+  </div>
+
+  <div id="ceu">
+    <div id="sol"></div>
+    <div id="lua"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
