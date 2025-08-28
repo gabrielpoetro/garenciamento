@@ -1,17 +1,25 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Login</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal de Gabriel</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>🔐 Acesso aos Projetos</h1>
-  <input type="password" id="senha" placeholder="Digite a senha">
-  <button onclick="verificarSenha()">Entrar</button>
-  <p id="mensagem"></p>
+  <div class="container">
+    <h1>Bem-vindo, Gabriel 👋</h1>
 
-  <div id="listaSites" style="display: none;"></div>
+    <div id="loginArea">
+      <button id="botaoLogin">Login</button>
+    </div>
+
+    <div id="conteudo" class="hidden">
+      <button id="listaSites">Mostrar Sites</button>
+      <button id="botaoLogout">Logout</button>
+      <div id="conteudoSites"></div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
