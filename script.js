@@ -1,46 +1,40 @@
-function verificarSenha() {
-  const senhaCorreta = "061723";
-  const senhaDigitada = document.getElementById("senha").value;
-  const mensagem = document.getElementById("mensagem");
-
-  if (senhaDigitada === senhaCorreta) {
-    localStorage.setItem("autenticado", "true");
-    mostrarProjetos();
-  } else {
-    mensagem.textContent = "Senha incorreta. Tente novamente.";
-  }
-}
-
-function mostrarProjetos() {
-  document.querySelector("input").style.display = "none";
-  document.querySelector("button").style.display = "none";
-  document.getElementById("mensagem").style.display = "none";
-  document.getElementById("listaSites").style.display = "flex";
-  document.querySelector("h1").textContent = "🌟 Meus Projetos Favoritos";
-
-  const sitesFixos = [
-    { nome: "⚖️ Equilibra 2.0", url: "https://gabrielpoetro.github.io/equilibra2.0/", tipo: "Emocional" },
-    { nome: "🛒 Lista de Compras", url: "https://gabrielpoetro.github.io/lista-de-compras/", tipo: "Utilitário" },
-    { nome: "👵🍲 Receitas da Vovó", url: "https://gabrielpoetro.github.io/Receitas-da-Vov-/", tipo: "Culinária" },
-    { nome: "✍️ Poemas Infinitos", url: "https://gabrielpoetro.github.io/poema/", tipo: "Criatividade" },
-    { nome: "⏳ Atemporal", url: "https://gabrielpoetro.github.io/atemporal/", tipo: "Reflexão" }
-  ];
-
+document.addEventListener("DOMContentLoaded", () => {
+  const botaoLogin = document.getElementById("botaoLogin");
   const listaSites = document.getElementById("listaSites");
-  listaSites.innerHTML = "";
+  const botaoLogout = document.getElementById("botaoLogout");
+  const loginArea = document.getElementById("loginArea");
+  const conteudo = document.getElementById("conteudo");
+  const conteudoSites = document.getElementById("conteudoSites");
 
-  sitesFixos.forEach(site => {
-    const link = document.createElement("a");
-    link.href = site.url;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.className = "botao-verde";
-    link.textContent = `${site.nome} (${site.tipo})`;
-    listaSites.appendChild(link);
-  });
-}
+  if (botaoLogin) {
+    botaoLogin.addEventListener("click", () => {
+      loginArea.classList.add("hidden");
+      conteudo.classList.remove("hidden");
+      console.log("Login realizado com sucesso!");
+    });
+  }
 
-// Proteção contra acesso direto
-if (localStorage.getItem("autenticado") === "true") {
-  mostrarProjetos();
-}
+  if (listaSites) {
+    listaSites.addEventListener("click", () => {
+      conteudoSites.innerHTML = `
+        <ul>
+          <li><a href="https://gabrielpoetro.github.io/equilibra2.0/" target="_blank">🌿 Equilibra 3.0</a></li>
+          <li><a href="https://gabrielpoetro.github.io/lista-de-compras/" target="_blank">🛒 Lista de Compras</a></li>
+          <li><a href="https://gabrielpoetro.github.io/Receitas-da-Vov-/" target="_blank">🍰 Receitas da Vovó</a></li>
+          <li><a href="https://gabrielpoetro.github.io/poema/" target="_blank">🌙 Poemas Infinitos</a></li>
+          <li><a href="https://gabrielpoetro.github.io/atemporal/" target="_blank">⏳ Atemporal</a></li>
+        </ul>
+      `;
+      console.log("Lista de sites exibida.");
+    });
+  }
+
+  if (botaoLogout) {
+    botaoLogout.addEventListener("click", () => {
+      conteudo.classList.add("hidden");
+      loginArea.classList.remove("hidden");
+      conteudoSites.innerHTML = "";
+      console.log("Logout realizado.");
+    });
+  }
+});
