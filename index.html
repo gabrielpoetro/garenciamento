@@ -1,50 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Painel Gabriel</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <button id="toggleTema">🌗 Alternar Tema</button>
+  <h1>🔐 Acesso aos Projetos</h1>
+  <input type="password" id="senha" placeholder="Digite a senha">
+  <button onclick="verificarSenha()">Entrar</button>
+  <p id="mensagem"></p>
 
-  <h1>Painel Gabriel</h1>
-
-  <form id="form">
-    <input name="titulo" placeholder="Título" required />
-    <input name="descricao" placeholder="Descrição" required />
-    <select name="categoria">
-      <option value="trabalho">Trabalho</option>
-      <option value="pessoal">Pessoal</option>
-      <option value="estudos">Estudos</option>
-    </select>
-    <input name="tags" placeholder="Tags (opcional)" />
-    <button type="submit">Adicionar</button>
-  </form>
-
-  <div class="filtros">
-    <select id="filtroCategoria">
-      <option value="todos">Todas categorias</option>
-      <option value="trabalho">Trabalho</option>
-      <option value="pessoal">Pessoal</option>
-      <option value="estudos">Estudos</option>
-    </select>
-
-    <select id="filtroStatus">
-      <option value="todos">Todos status</option>
-      <option value="pendente">Pendente</option>
-      <option value="concluido">Concluído</option>
-    </select>
-
-    <input id="busca" placeholder="Buscar..." />
-    <button id="exportar">Exportar JSON</button>
-  </div>
-
-  <ul id="lista"></ul>
-
-  <h2>🌐 Meus Sites</h2>
-  <ul id="meus-sites"></ul>
+  <div id="listaSites" style="display: none;"></div>
 
   <script src="script.js"></script>
 </body>
