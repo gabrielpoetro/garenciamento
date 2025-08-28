@@ -1,65 +1,37 @@
-function verificarSenha() {
-  const senha = document.getElementById("senha").value;
-  if (senha === "171923") {
-    document.getElementById("login").style.display = "none";
-    document.getElementById("painel").style.display = "block";
-    atualizarCicloCeleste();
-    carregarMelhorias();
-  } else {
-    alert("Senha incorreta.");
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxiPtAP6dIBK8P5GTQxD-mcjFyl3sJ0c9pT2bSfJHm6ExU8vD_s0ypngc2hg018dF-2Ew/exec";
+const API_KEY = "gabriel123";
+
+const elNota = document.getElementById("nota");
+const elStatus = document.getElementById("status");
+
+function salvar() {
+  const texto = elNota.value;
+  if (!texto.trim()) {
+    elStatus.textContent = "⚠️ Escreva algo antes de salvar.";
+    return;
   }
+
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    body: JSON.stringify({ texto, chave: API_KEY }),
+    headers: { "Content-Type": "application/json" }
+  })
+  .then(res => res.text())
+  .then(msg => elStatus.textContent = "✅ Salvo com sucesso!")
+  .catch(err => elStatus.textContent = "❌ Erro ao salvar.");
 }
 
-function salvarMelhorias() {
-  const texto = document.getElementById("melhorias").value;
-  localStorage.setItem("melhoriasGabriel", texto);
-  alert("Ideias salvas!");
+function carregar() {
+  fetch(`${SCRIPT_URL}?chave=${API_KEY}`)
+    .then(res => res.json())
+    .then(data => {
+      elNota.value = data.texto || "";
+      elStatus.textContent = "📥 Anotação carregada.";
+    })
+    .catch(err => elStatus.textContent = "❌ Erro ao carregar.");
 }
 
-function carregarMelhorias() {
-  const salvas = localStorage.getItem("melhoriasGabriel");
-  if (salvas) {
-    document.getElementById("melhorias").value = salvas;
-  }
-}
-
-function atualizarCicloCeleste() {
-  const hora = new Date().getHours();
-  const sol = document.getElementById('sol');
-  const lua = document.getElementById('lua');
-  const frase = document.getElementById('frase');
-  const body = document.body;
-
-  body.classList.remove("manha", "tarde", "noite");
-
-  const largura = window.innerWidth;
-  const altura = window.innerHeight;
-
-  if (hora >= 5 && hora < 12) {
-    body.classList.add("manha");
-    frase.textContent = 'O dia desperta com promessas suaves.';
-    sol.style.display = 'block';
-    lua.style.display = 'none';
-    const progresso = (hora - 5) / 7;
-    sol.style.left = `${progresso * largura}px`;
-    sol.style.top = `${(1 - Math.abs(progresso - 0.5) * 2) * altura * 0.5}px`;
-  } else if (hora >= 12 && hora < 18) {
-    body.classList.add("tarde");
-    frase.textContent = 'A luz dança sobre os telhados e ideias.';
-    sol.style.display = 'block';
-    lua.style.display = 'none';
-    const progresso = (hora - 12) / 6;
-    sol.style.left = `${progresso * largura}px`;
-    sol.style.top = `${(1 - Math.abs(progresso - 0.5) * 2) * altura * 0.5}px`;
-  } else {
-    body.classList.add("noite");
-    frase.textContent = hora < 21
-      ? 'O crepúsculo pinta o céu com saudade.'
-      : 'A noite sussurra mistérios sob o véu das estrelas.';
-    sol.style.display = 'none';
-    lua.style.display = 'block';
-    const progresso = hora >= 18 ? (hora - 18) / 6 : hora / 5;
-    lua.style.left = `${progresso * largura}px`;
-    lua.style.top = `${(1 - Math.abs(progresso - 0.5) * 2) * altura * 0.5}px`;
-  }
+function limpar() {
+  elNota.value = "";
+  elStatus.textContent = "🧹 Campo limpo.";
 }
