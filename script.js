@@ -13,7 +13,7 @@ function salvar() {
 
   fetch(SCRIPT_URL, {
     method: "POST",
-    body: JSON.stringify({ texto, chave: API_KEY }),
+    body: JSON.stringify({ texto, key: API_KEY }),
     headers: { "Content-Type": "application/json" }
   })
   .then(res => res.text())
@@ -22,7 +22,7 @@ function salvar() {
 }
 
 function carregar() {
-  fetch(`${SCRIPT_URL}?chave=${API_KEY}`)
+  fetch(`${SCRIPT_URL}?key=${API_KEY}`)
     .then(res => res.json())
     .then(data => {
       elNota.value = data.texto || "";
@@ -35,3 +35,5 @@ function limpar() {
   elNota.value = "";
   elStatus.textContent = "🧹 Campo limpo.";
 }
+
+document.addEventListener("DOMContentLoaded", carregar);
